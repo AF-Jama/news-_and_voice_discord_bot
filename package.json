@@ -1,0 +1,23 @@
+{
+  "name": "discord_bot",
+  "version": "1.0.0",
+  "description": "This is a bot that records users when a voice call is made with atleast 2 people in it. When the people in the call then drops below 2 the recording is then posted into the chat ",
+  "main": "bot.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.13.0",
+    "@discordjs/rest": "^0.4.1",
+    "@discordjs/voice": "^0.9.0",
+    "discord-api-types": "^0.32.1",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "fs.promises": "^0.1.2",
+    "node-fetch": "^3.2.4"
+  }
+}
