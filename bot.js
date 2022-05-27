@@ -1,17 +1,21 @@
-import { Client, Intents, Collection } from 'discord.js'
+import { Client, Intents, Collection, Guild } from 'discord.js'
 import {REST} from '@discordjs/rest'
 import {Routes} from 'discord-api-types/v9'
 import 'dotenv/config'
-import { getBreakingNews,readBannedWordFile} from './utils.js' 
+import {readBannedWordFile} from './utils.js' 
 import { commands,CreateInteraction } from './commands/commands.js'
+import { getBreakingNews } from './news/news.js'
 import { fs, rmdirSync } from 'file-system'
 import { channelMention, SlashCommandBuilder } from '@discordjs/builders'
 import { VoiceConnection,AudioPlayerStatus, VoiceConnectionStatus } from '@discordjs/voice'
 import fetch from 'node-fetch'
 import { ConnectionVisibility } from 'discord-api-types/v10'
 
+const prefix = '!'
+
 const newsApiKey = process.env.NEWS_API_KEY // constant authorisation API key that is used to make requests to news api
 const URL = `https://newsdata.io/api/1/news?apikey=${newsApiKey}&country=gb,us&category=world,entertainment,politics,technology,environment&language=en&page=1` // BASE URL TO REQUEST TO
+const UK_URL = `https://newsapi.org/v2/top-headlines?country=gb&apiKey=${newsApiKey}`
 const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES,Intents.FLAGS.DIRECT_MESSAGES] }) //creates clients object with intents
 
 // need to create function that reads the banned-word.txt file which can then be used to prevent messages containing banned words
@@ -45,11 +49,22 @@ client.on('messageCreate',async (msg)=>{
         .catch(err=>console.log(err))
 
     }
+
+    if(msg.content.startsWith(`${prefix}createtextchannel`) && msg.member.roles.cache.some(role=>role.name === 'workers')){
+        const name = msg.content.replace('!createtextchannel ','')
+        msg.guild.channels.create(name, {
+            type: 'GUILD_TEXT',
+    })
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}
+
 })
 
 // client.on("messageDelete",msg=>{
 
 // })
+
 
 client.once('ready',()=>{
     console.log("Bot has woken up to play")
@@ -67,3 +82,4 @@ client.on('interactionCreate',CreateInteraction)
 client.on(VoiceConnectionStatus.Ready,(oldState,newState)=>{
     console.log("Connection is in the ready state!")
 })
+

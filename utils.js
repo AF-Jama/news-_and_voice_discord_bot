@@ -6,13 +6,6 @@ import { Routes } from 'discord-api-types/v9'
 import 'dotenv/config'
 import { fs } from 'file-system'
 
-export const getBreakingNews = async(baseURL)=>{
-    let res = await fetch(baseURL) // returns response value in returned promise
-    res = await res.json() //returns values from returned json promise
-    
-    return res; // returns value as a promise
-}
-
 
 export const readBannedWordFile = async ()=>{
     try {
