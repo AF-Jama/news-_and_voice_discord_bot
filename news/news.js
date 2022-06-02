@@ -1,8 +1,5 @@
-import fetch from "node-fetch";
-import * as c from 'node-schedule'
-
-
-export const getBreakingNews = async(baseURL)=>{
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const getBreakingNews = async(baseURL)=>{
     try{
         let res = await fetch(baseURL) // returns response value in returned promise
         res = await res.json() //returns values from returned json promise
@@ -18,7 +15,7 @@ export const getBreakingNews = async(baseURL)=>{
 
 // getBreakingNews('https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=fc37270c8c2e4359aa876d56a659a346')
 
-export const getLastMessageInNewsChannel = async (client,channelId) =>{
+const getLastMessageInNewsChannel = async (client,channelId) =>{
     try {
         const channel = await client.channels.fetch(channelId) // returns promise value, in this case this returns the fetched channel
         let message = await channel.messages.fetch({ limit: 1 })
@@ -28,12 +25,11 @@ export const getLastMessageInNewsChannel = async (client,channelId) =>{
     }
 }
 
-export const deleteMessagesInNewsChannel = ()=>{
+const deleteMessagesInNewsChannel = ()=>{
     //deletes message that is not sent by bot
-
 }
 
-export const postNewsArticle = async (client,channelId,res)=>{
+const postNewsArticle = async (client,channelId,res)=>{
     try{
         const channel = await client.channels.fetch(channelId)
         await channel.send({content: `${res.title}\n${res.url}` })
@@ -42,3 +38,10 @@ export const postNewsArticle = async (client,channelId,res)=>{
         console.log(err)
     }
 } 
+
+module.exports = {
+    getLastMessageInNewsChannel,
+    deleteMessagesInNewsChannel,
+    postNewsArticle,
+    getBreakingNews,
+}
