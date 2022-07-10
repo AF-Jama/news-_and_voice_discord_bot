@@ -7,7 +7,7 @@ module.exports = {
     description:"returns user information",
     data: new SlashCommandBuilder().setName('user').setDescription('Replies with user info!'),
 
-    async execute(interaction){
+    async execute(client,interaction){
         await interaction.reply({content:`Your username is: ${interaction.user.username}\n Your user id: ${interaction.user.id}`,ephemeral:true})
     }
 

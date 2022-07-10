@@ -15,7 +15,7 @@ module.exports = {
             .setDescription('Second number')
             .setRequired(true)),
 
-    async execute(interaction){
+    async execute(client,interaction){
         const total = interaction.options.getNumber('num1') + interaction.options.getNumber('num2')
         console.log(`Total is ${total}`)
         await interaction.reply({content:total.toString(),ephemeral:true})

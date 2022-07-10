@@ -11,7 +11,7 @@ module.exports = {
             .setDescription('string to be echoed')
             .setRequired(true)),
 
-    async execute(interaction){
+    async execute(client,interaction){
         await interaction.reply({content:interaction.options.getString('string1'),ephemeral:true})
         .then(res=>console.log(res))
         .catch(err=>console.log(err))
