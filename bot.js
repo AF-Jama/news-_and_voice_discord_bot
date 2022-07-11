@@ -26,7 +26,7 @@ const commandFiles = readdirSync("./commands").filter(file=>file.endsWith('.js')
 
 for(const file of commandFiles){
     const command = require(`./commands/${file}`) // returns module.exports object for particular file
-
+    console.log(command)
     client.commands.set(command.name,command) // sets each file into a set with a key with its name and the exported module
     commandsList.push(command.data.toJSON())
 }

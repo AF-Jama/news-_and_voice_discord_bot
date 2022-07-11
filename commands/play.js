@@ -60,10 +60,14 @@ module.exports = {
             const resource = createAudioResource(youtubeVid); // creating resource that can be played
             player.play(resource)
             connection.subscribe(player)
+            player.playing = true
             interaction.reply({content:`Now playing -  ${title}`})
         }catch(err){
             interaction.reply(`There was an-error during the connection and playing of music ${err}`)
         }
         
     },
+    player
 }
+
+
