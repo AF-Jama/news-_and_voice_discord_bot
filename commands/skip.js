@@ -1,5 +1,5 @@
 const {SlashCommandBuilder} = require('@discordjs/builders')
-const {execute} = require('./play.js')
+const {execute,player} = require('./play.js')
 
 
 module.exports = {
@@ -13,6 +13,8 @@ module.exports = {
         }
         const [first] = client.queue // gets first element in set
         client.queue.delete(first)
+        // disconnect from current playing sound
+        player.stop() // stops current resource being played and destroys the resource
         await execute(client,interaction) // executes play controller
     }
 };

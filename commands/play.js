@@ -50,6 +50,7 @@ module.exports = {
             let {all} = result // dereference results   
             const video = checkResultsForSearch(all)
             if(!video) {
+                // triggerd when video returns when search array is 0
                 await interaction.reply("No matches for video, this search will now be removed")
                 client.queue.delete(first) // removes search term from queue
                 return;
@@ -58,9 +59,9 @@ module.exports = {
             const {url,title} = video // destrucuture url from video object
             const youtubeVid = ytdl(url,{filter: 'audioonly'}) // returns internal.readable 
             const resource = createAudioResource(youtubeVid); // creating resource that can be played
-            player.play(resource)
-            connection.subscribe(player)
-            player.playing = true
+            player.play(resource) // plays audio resource 
+            connection.subscribe(player) // connection to subcribes to audio player
+            player.playing = true // playing set to true
             interaction.reply({content:`Now playing -  ${title}`})
         }catch(err){
             interaction.reply(`There was an-error during the connection and playing of music ${err}`)

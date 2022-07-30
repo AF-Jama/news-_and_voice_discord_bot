@@ -12,8 +12,8 @@ module.exports = {
             await interaction.reply("Cannot resume as nothing has been paused")
             return;
         }
-        player.unpause()
-        player.paused = false
+        player.unpause() 
+        player.paused = false // paused boolean becomes false
         return await interaction.reply("Song has been resumed.")
     }
 }
