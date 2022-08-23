@@ -2,7 +2,7 @@ const {joinVoiceChannel} = require('@discordjs/voice')
 const ytdl = require('ytdl-core');
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const { createAudioPlayer,createAudioResource,NoSubscriberBehavior,VoiceConnectionStatus,AudioPlayerStatus } = require('@discordjs/voice');
-const ytsearch = require('yt-search')
+const {search,checkResultsForSearch} = require('../music/music.js')
 
 
 const player = createAudioPlayer({
@@ -11,14 +11,6 @@ const player = createAudioPlayer({
 	},
 });
 
-const search = async (query)=>{
-    const result = await ytsearch(query)
-    return result
-}
-
-const checkResultsForSearch = (result)=>{
-    return (result.length>0 ? result = result[0] : null)
-}
 
 module.exports = {
     name:"play",
@@ -31,6 +23,12 @@ module.exports = {
             await interaction.reply("You must be in a voice channel to use this command") // triggered if interaction is used when user is not in a voice channel
             return;
         } 
+
+        if(!voiceChannel.name.includes('music')) return await interaction.reply({content:"You must be in a music voice channel to play music"})
+
+        if(!interaction.channel.name.includes('music')){
+            await interaction.reply({content:"You must be music text channel to play music"})
+        }
 
         if (client.queue.size === 0){
             await interaction.reply("Please add song to the queue to be played")

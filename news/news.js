@@ -25,8 +25,13 @@ const getLastMessageInNewsChannel = async (client,channelId) =>{
     }
 }
 
-const deleteMessagesInNewsChannel = ()=>{
+const deleteMessagesInNewsChannel = async (msg)=>{
     //deletes message that is not sent by bot
+    try{
+        await msg.delete()
+    }catch(err){
+        return;
+    }
 }
 
 const postNewsArticle = async (client,channelId,res)=>{
