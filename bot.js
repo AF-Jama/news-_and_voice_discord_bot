@@ -19,7 +19,11 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_M
 client.commands = new Collection() // store slash modules in a set 
 client.queue = new Set() // queue that contains searches 
 const commandsList = [] // storage of commands
+<<<<<<< HEAD
 const commandFiles = readdirSync("./commands").filter(file=>file.endsWith('.js')) // returns all files in command directory that end with js
+=======
+const commandFiles = readdirSync("./commands").filter(file=>file.endsWith('.js')) // returns all files in command directory that end with js in array data structure
+>>>>>>> 9aa20fe (Refactored code base to create more modularity)
 
 
 for(const file of commandFiles){
@@ -82,7 +86,11 @@ client.on('interactionCreate', async (interaction)=>{
 
     if(!command) return ; // if not in set then command does not exist
     try {
+<<<<<<< HEAD
         await command.execute(client,interaction)
+=======
+        await command.execute(client,interaction) // triggers execute method from module.exports
+>>>>>>> 9aa20fe (Refactored code base to create more modularity)
     } catch (error) {
         console.log(`Error has been triggered when excuting slash command: ${error}`)
         await interaction.reply({content:'Unable to execute slash command'})

@@ -6,7 +6,11 @@ const readBannedWordFile = async ()=>{
     data = data.split('\n')
     return data   
     } catch (error) {
+<<<<<<< HEAD
         
+=======
+        return ;
+>>>>>>> 9aa20fe (Refactored code base to create more modularity)
     }
 }
 

@@ -2,7 +2,11 @@ const {joinVoiceChannel} = require('@discordjs/voice')
 const ytdl = require('ytdl-core');
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const { createAudioPlayer,createAudioResource,NoSubscriberBehavior,VoiceConnectionStatus,AudioPlayerStatus } = require('@discordjs/voice');
+<<<<<<< HEAD
 const ytsearch = require('yt-search')
+=======
+const {search,checkResultsForSearch} = require('../music/music.js')
+>>>>>>> 9aa20fe (Refactored code base to create more modularity)
 
 
 const player = createAudioPlayer({
@@ -11,6 +15,7 @@ const player = createAudioPlayer({
 	},
 });
 
+<<<<<<< HEAD
 const search = async (query)=>{
     const result = await ytsearch(query)
     return result
@@ -19,6 +24,9 @@ const search = async (query)=>{
 const checkResultsForSearch = (result)=>{
     return (result.length>0 ? result = result[0] : null)
 }
+=======
+
+>>>>>>> 9aa20fe (Refactored code base to create more modularity)
 
 module.exports = {
     name:"play",
@@ -30,7 +38,16 @@ module.exports = {
         if(!voiceChannel){
             await interaction.reply("You must be in a voice channel to use this command") // triggered if interaction is used when user is not in a voice channel
             return;
+<<<<<<< HEAD
         } 
+=======
+        }
+        if(!voiceChannel.name.includes('music')){
+            await interaction.reply({content:'You must be in a music channel to play music'})
+            return;
+        }
+
+>>>>>>> 9aa20fe (Refactored code base to create more modularity)
 
         if (client.queue.size === 0){
             await interaction.reply("Please add song to the queue to be played")
