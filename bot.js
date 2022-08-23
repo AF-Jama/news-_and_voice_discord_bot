@@ -91,7 +91,7 @@ client.on('interactionCreate', async (interaction)=>{
 
 
 
-cron.scheduleJob('*/1 * * * *',async ()=>{
+cron.scheduleJob('*/5 * * * *',async ()=>{
     try {
         let res = await getBreakingNews(URL) // return response
         res = res.articles // returns array of news objects
