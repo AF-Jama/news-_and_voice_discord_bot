@@ -6,7 +6,7 @@ const {getLastMessageInNewsChannel,deleteMessagesInNewsChannel,postNewsArticle,g
 const {scan} = require('./messages/messages.js')
 // const { fs, rmdirSync,readdirSync } = require('file-system')
 const {readdirSync} = require('fs')
-const { VoiceConnection,AudioPlayerStatus, VoiceConnectionStatus,getVoiceConnection } = require('@discordjs/voice')
+const { VoiceConnection,AudioPlayerStatus, VoiceConnectionStatus,getVoiceConnection  } = require('@discordjs/voice')
 const cron = require('node-schedule')
 const { ConnectionVisibility } = require('discord-api-types/v10')
 const { readdir } = require('fs.promises')
@@ -30,7 +30,8 @@ for(const file of commandFiles){
 } 
 
 const guildId = client.guilds.cache.get(process.env.GUILD_ID)
-const connection = getVoiceConnection('972303938751721502')
+const connection = getVoiceConnection(process.env.GUILD_ID)
+console.log(connection)
 // connection.on(VoiceConnectionStatus.Disconnected, async (oldState, newState) => {
 //     try {
 //         await Promise.race([

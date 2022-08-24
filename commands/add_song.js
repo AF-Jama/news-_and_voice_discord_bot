@@ -11,11 +11,13 @@ module.exports = {
         .setRequired(true)),
 
     async execute(client,interaction){
-        const search = interaction.options.getString('search')
-        console.log(search)
-        client.queue.add(search)
-        console.log(client.queue)
-        await interaction.reply({content:`The search term - ${search} has been added to the queue`,ephemeral:true})
+        if(client.queue.size<=5){
+            const search = interaction.options.getString('search')
+            client.queue.add(search)
+            console.log(client.queue)
+            return await interaction.reply({content:`The search term - ${search} has been added to the queue`,ephemeral:true})
+        }
+        return await interaction.reply({content:`Cannot add song as there is already 5 songs in the queue`,ephemeral:true})
     }
 
 }

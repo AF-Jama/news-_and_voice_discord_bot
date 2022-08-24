@@ -4,7 +4,9 @@
   "description": "This is a bot that records users when a voice call is made with atleast 2 people in it. When the people in the call then drops below 2 the recording is then posted into the chat ",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bot.js",
+    "dev": "nodemon ./bot.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +26,7 @@
     "node-fetch": "^2.6.7",
     "node-fetch-commonjs": "^3.1.1",
     "node-schedule": "^2.1.0",
+    "nodemon": "^2.0.19",
     "yt-search": "^2.10.3",
     "ytdl-core": "^4.11.0"
   }
